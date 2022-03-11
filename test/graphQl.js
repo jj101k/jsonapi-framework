@@ -6,94 +6,94 @@ const jsonApiTestServer = require('../example/server')
 const Lokka = require('lokka').Lokka
 const Transport = require('lokka-transport-http').Transport
 const client = new Lokka({
-  transport: new Transport('http://localhost:16006/rest/')
+    transport: new Transport('http://localhost:16006/rest/')
 })
 
 describe('Testing jsonapi-server graphql', () => {
-  describe('read operations', () => {
-    it('filter with primary join and filter', () => client.query(`
-      {
-        photos(width: "<1000") {
-          url
-          width
-          tags
-          photographer(firstname: "Rahul") {
-            firstname
-          }
-        }
-      }
-    `).then(result => {
-      assert.deepEqual(result, {
-        'photos': [
-          {
-            'url': 'http://www.example.com/penguins',
-            'width': 60,
-            'tags': ['galapagos', 'emperor'],
-            'photographer': null
-          },
-          {
-            'url': 'http://www.example.com/treat',
-            'width': 350,
-            'tags': ['black', 'green'],
-            'photographer': {
-              'firstname': 'Rahul'
+    describe('read operations', () => {
+        it('filter with primary join and filter', () => client.query(`
+            {
+                photos(width: "<1000") {
+                    url
+                    width
+                    tags
+                    photographer(firstname: "Rahul") {
+                        firstname
+                    }
+                }
             }
-          }
-        ]
-      })
-    }))
+        `).then(result => {
+            assert.deepEqual(result, {
+                'photos': [
+                    {
+                        'url': 'http://www.example.com/penguins',
+                        'width': 60,
+                        'tags': ['galapagos', 'emperor'],
+                        'photographer': null
+                    },
+                    {
+                        'url': 'http://www.example.com/treat',
+                        'width': 350,
+                        'tags': ['black', 'green'],
+                        'photographer': {
+                            'firstname': 'Rahul'
+                        }
+                    }
+                ]
+            })
+        }))
 
-    it('filter with foreign join and filter', () => client.query(`
-      {
-        people(firstname: "Rahul") {
-          firstname
-          photos(width: "<1000") {
-            url
-            width
-          }
-        }
-      }
-    `).then(result => {
-      assert.deepEqual(result, {
-        'people': [
-          {
-            'firstname': 'Rahul',
-            'photos': [
-              {
-                'url': 'http://www.example.com/treat',
-                'width': 350
-              }
-            ]
-          }
-        ]
-      })
-    }))
+        it('filter with foreign join and filter', () => client.query(`
+            {
+                people(firstname: "Rahul") {
+                    firstname
+                    photos(width: "<1000") {
+                        url
+                        width
+                    }
+                }
+            }
+        `).then(result => {
+            assert.deepEqual(result, {
+                'people': [
+                    {
+                        'firstname': 'Rahul',
+                        'photos': [
+                            {
+                                'url': 'http://www.example.com/treat',
+                                'width': 350
+                            }
+                        ]
+                    }
+                ]
+            })
+        }))
 
-    it('filters with variables', () => client.query(`
-      query People($firstname: String!) {
-        people(firstname: $firstname) {
-          lastname
-        }
-      }
-    `, { firstname: 'Rahul' }).then(result => {
-      assert.deepEqual(result, {
-        'people': [
-          {
-            'lastname': 'Patel'
-          }
-        ]
-      })
-    }))
-  })
+        it('filters with variables', () => client.query(`
+            query People($firstname: String!) {
+                people(firstname: $firstname) {
+                    lastname
+                }
+            }
+        `, { firstname: 'Rahul' }).then(result => {
+            assert.deepEqual(result, {
+                'people': [
+                    {
+                        'lastname': 'Patel'
+                    }
+                ]
+            })
+        }))
+    })
 
-  describe('write operations', () => {
-    let tagId = null
+    describe('write operations', () => {
+        let tagId = null
 
-    it('create a tag', () => client.mutate(`
-      {
-        createTags(tags: {
-          name: "test1"
-          parent: {
+        it('create a tag', () => client.mutate(`
+            {
+                createTags(tags: {
+                    name: "test1"
+              parent: {
             id: "7541a4de-4986-4597-81b9-cf31b6762486"
           }
         }) {

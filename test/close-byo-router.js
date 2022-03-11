@@ -5,47 +5,47 @@ const childProcess = require('child_process')
 const path = require('path')
 
 describe('Testing jsonapi-server with bring-your-own router', () => {
-  const serverPath = path.join(__dirname, 'fixtures', 'server-byo-router.js')
+    const serverPath = path.join(__dirname, 'fixtures', 'server-byo-router.js')
 
-  let child
-  let isErrorEmitted
-  let isExitEmitted
-  let exitCode
-  let exitSignal
+    let child
+    let isErrorEmitted
+    let isExitEmitted
+    let exitCode
+    let exitSignal
 
-  it('"exit" event, no "error" event', (done) => {
-    setTimeout(() => {
-      assert.strictEqual(isExitEmitted, true)
-      assert.strictEqual(isErrorEmitted, false)
-      done()
-    }, 1000)
-  })
-
-  it('exit code is 0 (success)', () => {
-    assert.strictEqual(exitCode, 0)
-    assert.strictEqual(exitSignal, null)
-  })
-
-  before((done) => {
-    child = null
-    isErrorEmitted = false
-    isExitEmitted = false
-    exitCode = null
-
-    child = childProcess.fork(serverPath, [], { stdio: 'inherit' })
-    child.on('error', () => { isErrorEmitted = true })
-    child.on('exit', (code, signal) => {
-      exitCode = code
-      exitSignal = signal
-      isExitEmitted = true
-      done()
+    it('"exit" event, no "error" event', (done) => {
+        setTimeout(() => {
+            assert.strictEqual(isExitEmitted, true)
+            assert.strictEqual(isErrorEmitted, false)
+            done()
+        }, 1000)
     })
-  })
 
-  after(() => {
-    if (child) {
-      child.kill()
-      child = null
-    }
-  })
+    it('exit code is 0 (success)', () => {
+        assert.strictEqual(exitCode, 0)
+        assert.strictEqual(exitSignal, null)
+    })
+
+    before((done) => {
+        child = null
+        isErrorEmitted = false
+        isExitEmitted = false
+        exitCode = null
+
+        child = childProcess.fork(serverPath, [], { stdio: 'inherit' })
+        child.on('error', () => { isErrorEmitted = true })
+        child.on('exit', (code, signal) => {
+            exitCode = code
+            exitSignal = signal
+            isExitEmitted = true
+            done()
+        })
+    })
+
+    after(() => {
+        if (child) {
+            child.kill()
+            child = null
+        }
+    })
 })

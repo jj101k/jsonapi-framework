@@ -10,8 +10,8 @@ const jsonApi = require('../../.')
 const app = express()
 
 jsonApi.setConfig({
-  port: 0,
-  router: app
+    port: 0,
+    router: app
 })
 
 const resourcesPath = path.join(__dirname, '..', '..', 'example', 'resources')
@@ -21,6 +21,6 @@ jsonApi.start()
 const server = app.listen(0)
 
 setTimeout(() => {
-  jsonApi.close()
-  server.close()
+    jsonApi.close()
+    server.close()
 }, 500)
