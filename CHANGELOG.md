@@ -1,4 +1,10 @@
-# CHANGELOG (`@jagql/framework`)
+# CHANGELOG (`jsonapi-framework`)
+
+- - - - - -
+
+ . . . . . . . . . . . . F O R K . . . . . . . . . . . . .
+
+- - - - - -
 
 - 2018-08-07 - [pr-413](https://github.com/holidayextras/jsonapi-server/pull/413) support arrays properly in swagger
 - 2018-05-11 - add `joi-date-extensions` for date formatting
