@@ -3,8 +3,8 @@
 const request = require('request')
 const assert = require('assert')
 
-const helpers = require('./helpers.js')
-const jsonApiTestServer = require('../example/server.js')
+const helpers = require('./helpers')
+const jsonApiTestServer = require('../example/server')
 
 describe('Testing jsonapi-server', () => {
     describe('Creating a new resource with client-generated ID', () => {

@@ -1,9 +1,9 @@
 'use strict'
 
 const assert = require('assert')
-const helpers = require('./helpers.js')
+const helpers = require('./helpers')
 const request = require('request')
-const jsonApiTestServer = require('../example/server.js')
+const jsonApiTestServer = require('../example/server')
 
 describe('Testing jsonapi-server', () => {
     describe('Finding a specific resource', () => {

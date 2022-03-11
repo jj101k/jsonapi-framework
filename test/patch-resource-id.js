@@ -2,8 +2,8 @@
 
 const assert = require('assert')
 const request = require('request')
-const helpers = require('./helpers.js')
-const jsonApiTestServer = require('../example/server.js')
+const helpers = require('./helpers')
+const jsonApiTestServer = require('../example/server')
 
 describe('Testing jsonapi-server', () => {
     describe('Updating a resource', () => {

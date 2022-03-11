@@ -2,8 +2,8 @@
 
 const request = require('request')
 const assert = require('assert')
-const jsonApiTestServer = require('../example/server.js')
-const helpers = require('./helpers.js')
+const jsonApiTestServer = require('../example/server')
+const helpers = require('./helpers')
 
 describe('Testing jsonapi-server', () => {
     describe('authentication', () => {

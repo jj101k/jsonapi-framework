@@ -4,7 +4,7 @@ const testHelpers = module.exports = { }
 
 const assert = require('assert')
 const request = require('request')
-const swaggerValidator = require('./swaggerValidator.js')
+const swaggerValidator = require('./swaggerValidator')
 
 testHelpers.validateError = json => {
     try {

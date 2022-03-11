@@ -1,8 +1,8 @@
 'use strict'
 
 const assert = require('assert')
-const helpers = require('./helpers.js')
-const jsonApiTestServer = require('../example/server.js')
+const helpers = require('./helpers')
+const jsonApiTestServer = require('../example/server')
 
 const Lokka = require('lokka').Lokka
 const Transport = require('lokka-transport-http').Transport

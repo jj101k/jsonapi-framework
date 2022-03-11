@@ -1,7 +1,7 @@
 'use strict'
 
 const jsonApi = require('../../.')
-const brokenResponseHandler = require('../handlers/brokenResponseHandler.js')
+const brokenResponseHandler = require('../handlers/brokenResponseHandler')
 
 jsonApi.define({
     namespace: 'json:api',

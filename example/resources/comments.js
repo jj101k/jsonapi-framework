@@ -1,7 +1,7 @@
 'use strict'
 
 const jsonApi = require('../../.')
-const commentHandler = require('../handlers/commentHandler.js')
+const commentHandler = require('../handlers/commentHandler')
 
 jsonApi.define({
     namespace: 'json:api',

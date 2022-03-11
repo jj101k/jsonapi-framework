@@ -1,7 +1,7 @@
 'use strict'
 
 const jsonApi = require('../../.')
-const autoincrementHandler = require('../handlers/autoincrementHandler.js')
+const autoincrementHandler = require('../handlers/autoincrementHandler')
 
 jsonApi.define({
     namespace: 'json:api',

@@ -1,7 +1,7 @@
 'use strict'
 
 const jsonApi = require('../../.')
-const photoHandler = require('../handlers/photoHandler.js')
+const photoHandler = require('../handlers/photoHandler')
 
 jsonApi.define({
     namespace: 'json:api',
