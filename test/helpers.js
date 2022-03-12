@@ -10,7 +10,7 @@ testHelpers.validateError = json => {
     try {
         json = JSON.parse(json)
     } catch (e) {
-        console.log(json)
+        console.error(e)
         throw new Error('Failed to parse response')
     }
     let keys = Object.keys(json)
