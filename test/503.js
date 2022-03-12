@@ -2,7 +2,7 @@
 
 const assert = require('assert')
 const helpers = require('./helpers')
-const jsonApi = require('../lib/jsonApi')
+const jsonApi = require('../lib/jsonApiGlobal')
 const jsonApiTestServer = require('../example/server')
 
 describe('Testing jsonapi-server', () => {
