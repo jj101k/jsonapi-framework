@@ -2,7 +2,10 @@
 
 const swaggerValidator = module.exports = { }
 
-const swagger = require('../lib/swagger')
+const jsonApi = require('../.')
+const swaggerClass = require("../lib/swagger")
+
+const swagger = new swaggerClass(jsonApi._resources, jsonApi._apiConfig)
 const url = require('url')
 let swaggerDoc
 
