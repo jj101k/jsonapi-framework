@@ -40,6 +40,9 @@ testHelpers.validateJson = json => {
     assert.ok(json.jsonapi instanceof Object, 'Response should have a jsonapi block')
     assert.ok(json.meta instanceof Object, 'Response should have a meta block')
     assert.ok(json.links instanceof Object, 'Response should have a links block')
+    if(json.errors instanceof Object) {
+        console.error(json.errors)
+    }
     assert.ok(!(json.errors instanceof Object), 'Response should not have any errors')
     assert.strictEqual(typeof json.links.self, 'string', 'Response should have a "self" link')
     testHelpers.validatePagination(json)
