@@ -10,7 +10,7 @@
     "swagger",
     "api"
   ],
-  "main": "lib/jsonApi.js",
+  "main": "lib/jsonApiGlobal.js",
   "types": "types/jsonApi.d.ts",
   "author": "Jim Driscoll <jim.a.driscoll@gmail.com>",
   "license": "MIT",
