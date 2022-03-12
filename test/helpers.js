@@ -7,17 +7,18 @@ const request = require('request')
 const swaggerValidator = require('./swaggerValidator')
 
 testHelpers.validateError = json => {
+    let o
     try {
-        json = JSON.parse(json)
+        o = JSON.parse(json)
     } catch (e) {
-        console.error(e)
+        console.error(json, e)
         throw new Error('Failed to parse response')
     }
-    let keys = Object.keys(json)
+    let keys = Object.keys(o)
     assert.deepEqual(keys, [ 'jsonapi', 'meta', 'links', 'errors' ], 'Errors should have specific properties')
-    assert.strictEqual(typeof json.links.self, 'string', 'Errors should have a "self" link')
-    assert.ok(json.errors instanceof Array, 'errors should be an array')
-    json.errors.forEach(error => {
+    assert.strictEqual(typeof o.links.self, 'string', 'Errors should have a "self" link')
+    assert.ok(o.errors instanceof Array, 'errors should be an array')
+    o.errors.forEach(error => {
         keys = Object.keys(error)
         assert.deepEqual(keys, [ 'status', 'code', 'title', 'detail' ], 'errors should have specific properties')
         keys.forEach(i => {
@@ -25,7 +26,7 @@ testHelpers.validateError = json => {
             assert.strictEqual(typeof error[i], 'string', `${i} should be a string`)
         })
     })
-    return json
+    return o
 }
 
 testHelpers.validateJson = json => {
