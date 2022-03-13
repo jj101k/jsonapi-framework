@@ -4,7 +4,7 @@ const assert = require('assert')
 const helpers = require('./helpers')
 const jsonApiTestServer = require('../example/server')
 
-describe('Testing jsonapi-server', () => {
+describe('Testing jsonapi-server (post-resource)', () => {
   [ { name: 'articles', count: 4 },
     { name: 'comments', count: 2 },
     { name: 'people', count: 4 },
