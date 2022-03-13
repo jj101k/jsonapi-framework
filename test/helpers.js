@@ -42,6 +42,9 @@ testHelpers.validateJson = json => {
     assert.ok(json.links instanceof Object, 'Response should have a links block')
     if(json.errors instanceof Object) {
         console.error(json.errors)
+        if(Array.isArray(json.errors)) {
+            console.error(json.errors[0])
+        }
     }
     assert.ok(!(json.errors instanceof Object), 'Response should not have any errors')
     assert.strictEqual(typeof json.links.self, 'string', 'Response should have a "self" link')
