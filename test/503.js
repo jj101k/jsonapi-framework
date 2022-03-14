@@ -13,7 +13,11 @@ describe('Testing jsonapi-server', () => {
                 method: 'GET',
                 url
             }, (err, res) => {
+                if(err) console.error(err)
                 assert(!err)
+                if(res.statusCode !== 200) {
+                    console.warn(res)
+                }
                 assert.strictEqual(res.statusCode, 200, 'Expecting 200 OK')
                 done()
             })
