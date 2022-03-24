@@ -138,7 +138,7 @@ describe('Testing jsonapi-server', () => {
                     page
                 },
                 route: {
-                    combined: ''
+                    combined: 'http://localhost'
                 }
             }
 
