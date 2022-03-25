@@ -9,9 +9,8 @@ export interface postProcessingHandler {
      *
      * @param request
      * @param response
-     * @param callback
      */
-    action(request: express.Request, response: express.Response, callback: (error?: any) => any)
+    action(request: express.Request, response: express.Response): Promise<any>
 }
 
 type relationDatum = {
