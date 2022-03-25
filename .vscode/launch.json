@@ -12,7 +12,8 @@
                 "${file}"
             ],
             "skipFiles": [
-                "<node_internals>/**"
+                "<node_internals>/**",
+                "${workspaceFolder}/node_modules/**"
             ],
             "program": "${workspaceFolder}/node_modules/.bin/mocha"
         }
