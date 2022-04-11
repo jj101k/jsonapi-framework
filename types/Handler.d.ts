@@ -2,7 +2,6 @@
  * @module @jagql/framework/lib/handlers/Handler
  */
 
-import {PathParams} from 'express-serve-static-core'
 import {Request, Response} from 'express'
 import {ResourceConfig} from './ResourceConfig'
 

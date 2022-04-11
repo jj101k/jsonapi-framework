@@ -2,7 +2,7 @@
 /**
  * @module @jagql/framework/lib/ourJoi
  */
-import {AnySchema, JoiObject, Schema, FunctionSchema} from 'joi'
+import {AnySchema, Schema, FunctionSchema} from 'joi'
 import BaseJoi = require('joi')
 
 type UidType = 'uuid' | 'autoincrement'
