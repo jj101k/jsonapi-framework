@@ -2,9 +2,23 @@
   "extends": "standard",
   "env": {
     "node": true,
-    "mocha": true
+    "mocha": true,
+    "es6": true
   },
   "rules": {
-    "no-var": "error"
+    "comma-dangle": "off",
+    "eol-last": "off",
+    "eqeqeq": "off",
+    "indent": ["error", 4, {
+      "SwitchCase": 1
+    }],
+    "keyword-spacing": "off",
+    "new-cap": "warn",
+    "no-var": "error",
+    "n/no-callback-literal": "warn",
+    "object-curly-spacing": ["warn", "never"],
+    "operator-linebreak": ["warn", "after"],
+    "quotes": ["warn", "double"],
+    "space-before-function-paren": ["error", {"anonymous": "never", "asyncArrow": "always", "named": "never"}]
   }
 }
