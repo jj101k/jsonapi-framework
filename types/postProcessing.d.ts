@@ -46,11 +46,16 @@ export type dataTree = {
     /**
      *
      */
-    _dataItems: item[],
+    dataItems: item[],
     /**
      *
      */
-    [key: string]: dataTree
+    sub: {
+        /**
+         *
+         */
+        [key: string]: dataTree
+    },
 }
 
 /**
@@ -60,19 +65,24 @@ export type includeTree = {
     /**
      *
      */
-    _dataItems: item[],
+    dataItems: item[],
     /**
      *
      */
-    _filter: {
+    filter: {
         [key: string]: string | string[]
     },
     /**
      *
      */
-    _resourceConfig: ResourceConfig[],
+    resourceConfig: ResourceConfig<any>[],
     /**
      *
      */
-    [key: string]: includeTree,
+    sub: {
+        /**
+         *
+         */
+        [key: string]: includeTree,
+    }
 }
