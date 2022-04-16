@@ -50,8 +50,7 @@
     "mocha-performance": "0.1.1",
     "nyc": "^15.1.0",
     "swagger-tools": "0.10.4",
-    "typedoc": "^0.19.2",
-    "typedoc-plugin-external-module-name": "^4.0.6"
+    "typedoc": "^0.22.15"
   },
   "scripts": {
     "start": "node example/server.js",
@@ -63,7 +62,7 @@
     "jscpd": "jscpd --blame ./lib/ || echo 'Finished!'",
     "ci": "npm run jscpd && npm run lint && npm run cover",
     "predocs": "rimraf docs && mkdir -p docs",
-    "docs": "typedoc types",
+    "docs": "typedoc ./types/jsonApi.d.ts",
     "postdocs": "touch docs/.nojekyll"
   }
 }
