@@ -50,8 +50,8 @@
     "mocha-performance": "0.1.1",
     "nyc": "^15.1.0",
     "swagger-tools": "0.10.4",
-    "typedoc": "^0.12.0",
-    "typedoc-plugin-external-module-name": "^1.1.1"
+    "typedoc": "^0.19.2",
+    "typedoc-plugin-external-module-name": "^4.0.6"
   },
   "scripts": {
     "start": "node example/server.js",
