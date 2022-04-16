@@ -45,7 +45,7 @@
     "eslint-plugin-promise": "^6.0.0",
     "jscpd": "^3.4.5",
     "lokka": "1.7.0",
-    "lokka-transport-http": "1.6.1",
+    "lokka-transport-http": "^1.6.1",
     "mocha": "7.1.2",
     "mocha-performance": "0.1.1",
     "nyc": "^15.1.0",
