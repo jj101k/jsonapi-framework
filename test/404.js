@@ -1,35 +1,35 @@
-'use strict'
+"use strict"
 
-const request = require('request')
-const assert = require('assert')
-const helpers = require('./helpers')
-const jsonApiTestServer = require('../example/server')
+const request = require("request")
+const assert = require("assert")
+const helpers = require("./helpers")
+const jsonApiTestServer = require("../example/server")
 
-describe('Testing jsonapi-server', () => {
-    describe('404 pages', () => {
-        it('errors with invalid type #1', done => {
+describe("Testing jsonapi-server", () => {
+    describe("404 pages", () => {
+        it("errors with invalid type #1", done => {
             const data = {
-                method: 'get',
-                url: 'http://localhost:16006/res'
+                method: "get",
+                url: "http://localhost:16006/res"
             }
             request(data, (err, res, json) => {
                 assert.equal(err, null)
                 helpers.validateError(json)
-                assert.strictEqual(res.statusCode, 404, 'Expecting 404')
+                assert.strictEqual(res.statusCode, 404, "Expecting 404")
 
                 done()
             })
         })
 
-        it('errors with invalid type #2', done => {
+        it("errors with invalid type #2", done => {
             const data = {
-                method: 'get',
-                url: 'http://localhost:16006/rest/a/b/c/d/e'
+                method: "get",
+                url: "http://localhost:16006/rest/a/b/c/d/e"
             }
             request(data, (err, res, json) => {
                 assert.strictEqual(err, null)
                 helpers.validateError(json)
-                assert.strictEqual(res.statusCode, 404, 'Expecting 404')
+                assert.strictEqual(res.statusCode, 404, "Expecting 404")
 
                 done()
             })
