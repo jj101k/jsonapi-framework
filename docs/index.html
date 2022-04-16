@@ -1,164 +1,50 @@
-<!doctype html>
-<html class="default no-js">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>jagql</title>
-	<meta name="description" content="Documentation for jagql">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="assets/css/main.css">
-</head>
-<body>
-<header>
-	<div class="tsd-page-toolbar">
-		<div class="container">
-			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
-					<div class="field">
-						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
-						<input id="tsd-search-field" type="text" />
-					</div>
-					<ul class="results">
-						<li class="state loading">Preparing search index...</li>
-						<li class="state failure">The search index is not available</li>
-					</ul>
-					<a href="index.html" class="title">jagql</a>
-				</div>
-				<div class="table-cell" id="tsd-widgets">
-					<div id="tsd-filter">
-						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
-						<div class="tsd-filter-group">
-							<div class="tsd-select" id="tsd-filter-visibility">
-								<span class="tsd-select-label">All</span>
-								<ul class="tsd-select-list">
-									<li data-value="public">Public</li>
-									<li data-value="protected">Public/Protected</li>
-									<li data-value="private" class="selected">All</li>
-								</ul>
-							</div>
-							<input type="checkbox" id="tsd-filter-inherited" checked />
-							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
-							<input type="checkbox" id="tsd-filter-only-exported" />
-							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
-						</div>
-					</div>
-					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="tsd-page-title">
-		<div class="container">
-			<ul class="tsd-breadcrumb">
-				<li>
-					<a href="globals.html">Globals</a>
-				</li>
-			</ul>
-			<h1>jagql</h1>
-		</div>
-	</div>
-</header>
-<div class="container container-main">
-	<div class="row">
-		<div class="col-8 col-content">
-			<div class="tsd-panel tsd-typography">
-				<p>A resource driven framework to set up a {json:api} + GraphQL endpoint in record time.</p>
-				<a href="#motivation" id="motivation" style="color: inherit; text-decoration: none;">
-					<h2>Motivation</h2>
-				</a>
-				<p>Let us look at these great articles written by some very experiences developers -</p>
-				<ol>
-					<li><a href="https://blog.runscope.com/posts/you-might-not-need-graphql">Phil Sturgeon says if you use json:api you do not need GraphQL</a></li>
-					<li><a href="https://nordicapis.com/the-benefits-of-using-json-api/">Bill Doerrfeld writes about the benefits of json:api</a></li>
-					<li><a href="https://react-etc.net/entry/json-api-is-a-simple-alternative-to-graphql-and-rest">Jorge says json:api is a simple alternative to GraphQL</a></li>
-					<li><a href="https://jeremywsherman.com/blog/2016/07/23/why-im-meh-about-json-api/">Jeremy Sherman says he is not impressed by json:api and GraphQL is better</a></li>
-					<li><a href="https://brandur.org/api-paradigms">Brandur says GraphQL is the next frontier in Web Developement</a></li>
-				</ol>
-				<p>If you ask me, I&#39;d say -
-				<img src="https://thumbs.gfycat.com/AmazingDamagedAmericanquarterhorse-max-1mb.gif" alt=""></p>
-				<p>And in fact, some of the most used public APIs like Github have both REST and GraphQL.</p>
-				<p><strong>jagql</strong> lets you build a backend with both <code>{json:api}</code> and <em>GraphQL</em> support really really fast.</p>
-				<a href="#about-this-fork" id="about-this-fork" style="color: inherit; text-decoration: none;">
-					<h2>About this Fork</h2>
-				</a>
-				<p><strong>NOTE: This is a fork of holidayextra&#39;s <a href="https://github.com/holidayextras/jsonapi-server">jsonapi-server</a>
-						We have merged a lot of pending PRs on the original repo that we felt we would gain advantage from. The original project
-				was coing a bit too slowly for our needs.</strong></p>
-				<a href="#differences-from-upstream" id="differences-from-upstream" style="color: inherit; text-decoration: none;">
-					<h3>Differences from upstream</h3>
-				</a>
-				<a href="#primarykey-is-configurable" id="primarykey-is-configurable" style="color: inherit; text-decoration: none;">
-					<h4><code>primaryKey</code> is configurable</h4>
-				</a>
-				<p>In upstream, keys are by default <code>uuid</code> and are taken from DB, if <code>generateId</code> = <code>true</code>
-				We instead use a different property <code>primaryKey</code>, whose possible values are</p>
-				<ul>
-					<li><code>uuid</code> : Uses UUID v4 (generated from the client)</li>
-					<li><code>autoincrement</code> : Uses AUTOINCREMENT integers</li>
-				</ul>
-				<p>*In future there might be other types of primaryKeys if required.</p>
-				<a href="#relationship-key-type-is-configurable" id="relationship-key-type-is-configurable" style="color: inherit; text-decoration: none;">
-					<h4>relationship key type is configurable</h4>
-				</a>
-				<p>When creating a field, you can state how to relate it</p>
-				<pre><code class="language-javascript">jsonApi.define({
-  ...
-  <span class="hljs-attr">attributes</span>: {
-    ...
-    <span class="hljs-attr">author</span>: jsonApi.Joi.one(<span class="hljs-string">&#x27;people&#x27;</span>).uidType(<span class="hljs-string">&#x27;uuid&#x27;</span>)
-    ...
-  }
-})
+<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>jagql</title><meta name="description" content="Documentation for jagql"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">jagql</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1>jagql </h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography"><p>A resource driven framework to set up a {json:api} + GraphQL endpoint in record time.</p>
+
+<a href="#motivation" id="motivation" style="color: inherit; text-decoration: none;">
+  <h2>Motivation</h2>
+</a>
+<p>Let us look at these great articles written by some very experiences developers -</p>
+<ol>
+<li><a href="https://blog.runscope.com/posts/you-might-not-need-graphql">Phil Sturgeon says if you use json:api you do not need GraphQL</a></li>
+<li><a href="https://nordicapis.com/the-benefits-of-using-json-api/">Bill Doerrfeld writes about the benefits of json:api</a></li>
+<li><a href="https://react-etc.net/entry/json-api-is-a-simple-alternative-to-graphql-and-rest">Jorge says json:api is a simple alternative to GraphQL</a></li>
+<li><a href="https://jeremywsherman.com/blog/2016/07/23/why-im-meh-about-json-api/">Jeremy Sherman says he is not impressed by json:api and GraphQL is better</a></li>
+<li><a href="https://brandur.org/api-paradigms">Brandur says GraphQL is the next frontier in Web Developement</a></li>
+</ol>
+<p>If you ask me, I&#39;d say -
+<img src="https://thumbs.gfycat.com/AmazingDamagedAmericanquarterhorse-max-1mb.gif" alt=""></p>
+<p>And in fact, some of the most used public APIs like Github have both REST and GraphQL.</p>
+<p><strong>jagql</strong> lets you build a backend with both <code>{json:api}</code> and <em>GraphQL</em> support really really fast.</p>
+
+<a href="#about-this-fork" id="about-this-fork" style="color: inherit; text-decoration: none;">
+  <h2>About this Fork</h2>
+</a>
+<p><strong>NOTE: This is a fork of holidayextra&#39;s <a href="https://github.com/holidayextras/jsonapi-server">jsonapi-server</a>
+We have merged a lot of pending PRs on the original repo that we felt we would gain advantage from. The original project
+was coing a bit too slowly for our needs.</strong></p>
+
+<a href="#differences-from-upstream" id="differences-from-upstream" style="color: inherit; text-decoration: none;">
+  <h3>Differences from upstream</h3>
+</a>
+
+<a href="#primarykey-is-configurable" id="primarykey-is-configurable" style="color: inherit; text-decoration: none;">
+  <h4><code>primaryKey</code> is configurable</h4>
+</a>
+<p>In upstream, keys are by default <code>uuid</code> and are taken from DB, if <code>generateId</code> = <code>true</code>
+We instead use a different property <code>primaryKey</code>, whose possible values are</p>
+<ul>
+<li><code>uuid</code> : Uses UUID v4 (generated from the client)</li>
+<li><code>autoincrement</code> : Uses AUTOINCREMENT integers</li>
+</ul>
+<p>*In future there might be other types of primaryKeys if required.</p>
+
+<a href="#relationship-key-type-is-configurable" id="relationship-key-type-is-configurable" style="color: inherit; text-decoration: none;">
+  <h4>relationship key type is configurable</h4>
+</a>
+<p>When creating a field, you can state how to relate it</p>
+<pre><code class="language-javascript"><span class="hl-0">jsonApi</span><span class="hl-1">.</span><span class="hl-2">define</span><span class="hl-1">({</span><br/><span class="hl-1">  ...</span><br/><span class="hl-1">  </span><span class="hl-0">attributes</span><span class="hl-1">: {</span><br/><span class="hl-1">    ...</span><br/><span class="hl-1">    </span><span class="hl-0">author</span><span class="hl-1">: </span><span class="hl-0">jsonApi</span><span class="hl-1">.</span><span class="hl-0">Joi</span><span class="hl-1">.</span><span class="hl-2">one</span><span class="hl-1">(</span><span class="hl-3">&#39;people&#39;</span><span class="hl-1">).</span><span class="hl-2">uidType</span><span class="hl-1">(</span><span class="hl-3">&#39;uuid&#39;</span><span class="hl-1">)</span><br/><span class="hl-1">    ...</span><br/><span class="hl-1">  }</span><br/><span class="hl-1">})</span>
 </code></pre>
-				<p><em><strong>You&#39;d want to use our version of jsonapi-store-[*] plugins with this
-				as the original versions will not be compatible with this</strong></em></p>
-				<p><em>The old readme <a href="README-old.md">here</a> is verbatim copy of the original project</em></p>
-			</div>
-		</div>
-		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
-			<nav class="tsd-navigation primary">
-				<ul>
-					<li class="globals  ">
-						<a href="globals.html"><em>Globals</em></a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/root.html">root</a>
-					</li>
-				</ul>
-			</nav>
-			<nav class="tsd-navigation secondary menu-sticky">
-				<ul class="before-current">
-				</ul>
-			</nav>
-		</div>
-	</div>
-</div>
-<footer class="with-border-bottom">
-	<div class="container">
-		<h2>Legend</h2>
-		<div class="tsd-legend-group">
-			<ul class="tsd-legend">
-				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
-				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
-				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
-				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
-				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
-			</ul>
-		</div>
-	</div>
-</footer>
-<div class="container tsd-generator">
-	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
-</div>
-<div class="overlay"></div>
-<script src="assets/js/main.js"></script>
-</body>
-</html>
+<p><em><strong>You&#39;d want to use our version of jsonapi-store-[*] plugins with this
+as the original versions will not be compatible with this</strong></em></p>
+<p><em>The old readme <a href="README-old.md">here</a> is verbatim copy of the original project</em></p>
+</div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Exports</a></li></ul></nav><nav class="tsd-navigation secondary menu-sticky"><ul><li class="tsd-kind-class tsd-has-type-parameter"><a href="classes/Handler.html" class="tsd-kind-icon">Handler</a></li><li class="tsd-kind-interface"><a href="interfaces/ApiConfig.html" class="tsd-kind-icon">Api<wbr/>Config</a></li><li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/ResourceConfig.html" class="tsd-kind-icon">Resource<wbr/>Config</a></li><li class="tsd-kind-type-alias"><a href="modules.html#BaseType" class="tsd-kind-icon">Base<wbr/>Type</a></li><li class="tsd-kind-type-alias"><a href="modules.html#JsonApiProtocols" class="tsd-kind-icon">Json<wbr/>Api<wbr/>Protocols</a></li><li class="tsd-kind-variable"><a href="modules.html#ChainHandler" class="tsd-kind-icon">Chain<wbr/>Handler</a></li><li class="tsd-kind-variable"><a href="modules.html#Joi" class="tsd-kind-icon">Joi</a></li><li class="tsd-kind-variable"><a href="modules.html#MemoryHandler" class="tsd-kind-icon">Memory<wbr/>Handler</a></li><li class="tsd-kind-variable"><a href="modules.html#metrics" class="tsd-kind-icon">metrics</a></li><li class="tsd-kind-function"><a href="modules.html#authenticate" class="tsd-kind-icon">authenticate</a></li><li class="tsd-kind-function"><a href="modules.html#close" class="tsd-kind-icon">close</a></li><li class="tsd-kind-function tsd-has-type-parameter"><a href="modules.html#define" class="tsd-kind-icon">define</a></li><li class="tsd-kind-function"><a href="modules.html#getExpressServer" class="tsd-kind-icon">get<wbr/>Express<wbr/>Server</a></li><li class="tsd-kind-function"><a href="modules.html#onUncaughtException" class="tsd-kind-icon">on<wbr/>Uncaught<wbr/>Exception</a></li><li class="tsd-kind-function"><a href="modules.html#setConfig" class="tsd-kind-icon">set<wbr/>Config</a></li><li class="tsd-kind-function"><a href="modules.html#start" class="tsd-kind-icon">start</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Legend</h2><div class="tsd-legend-group"><ul class="tsd-legend"><li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li><li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li></ul></div><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="assets/main.js"></script></body></html>
