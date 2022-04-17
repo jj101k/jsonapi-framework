@@ -2,16 +2,17 @@
 
 const assert = require("assert")
 const jsonApiTestServer = require("../example/server")
+const {gql, GraphQLClient} = require("graphql-request")
 
-const Lokka = require("lokka").Lokka
-const Transport = require("lokka-transport-http").Transport
-const client = new Lokka({
-    transport: new Transport("http://localhost:16006/rest/")
+const client = new GraphQLClient("http://localhost:16006/rest/", {
+    headers: {
+        Accept: "application/json"
+    }
 })
 
 describe("Testing jsonapi-server graphql", () => {
     describe("read operations", () => {
-        it("filter with primary join and filter", () => client.query(`
+        it("filter with primary join and filter", () => client.request(gql`
             {
                 photos(width: "<1000") {
                     url
@@ -43,7 +44,7 @@ describe("Testing jsonapi-server graphql", () => {
             })
         }))
 
-        it("filter with foreign join and filter", () => client.query(`
+        it("filter with foreign join and filter", () => client.request(gql`
             {
                 people(firstname: "Rahul") {
                     firstname
@@ -69,7 +70,7 @@ describe("Testing jsonapi-server graphql", () => {
             })
         }))
 
-        it("filters with variables", () => client.query(`
+        it("filters with variables", () => client.request(gql`
             query People($firstname: String!) {
                 people(firstname: $firstname) {
                     lastname
@@ -89,47 +90,47 @@ describe("Testing jsonapi-server graphql", () => {
     describe("write operations", () => {
         let tagId = null
 
-        it("create a tag", () => client.mutate(`
-            {
+        it("create a tag", () => client.request(gql`
+            mutation createTags {
                 createTags(tags: {
                     name: "test1"
-              parent: {
-            id: "7541a4de-4986-4597-81b9-cf31b6762486"
-          }
-        }) {
-          id
-          name
-          parent {
-            id
-            name
-          }
-        }
-      }
-    `).then(result => {
+                    parent: {
+                        id: "7541a4de-4986-4597-81b9-cf31b6762486"
+                    }
+                }) {
+                    id
+                    name
+                    parent {
+                        id
+                        name
+                    }
+                }
+            }
+        `).then(result => {
             assert.strictEqual(result.createTags.name, "test1")
             assert.strictEqual(result.createTags.parent.id, "7541a4de-4986-4597-81b9-cf31b6762486")
             assert.strictEqual(result.createTags.parent.name, "live")
             tagId = result.createTags.id
         }))
 
-        it("update the new tag", () => client.mutate(`
-      {
-        updateTags(tags: {
-          id: "${tagId}"
-          name: "test2"
-          parent: {
-            id: "68538177-7a62-4752-bc4e-8f971d253b42"
-          }
-        }) {
-          id
-          name
-          parent {
-            id
-            name
-          }
-        }
-      }
-    `).then(result => {
+        it("update the new tag", () => client.request(gql`
+            mutation updateTags {
+                updateTags(tags: {
+                    id: "${tagId}"
+                    name: "test2"
+                    parent: {
+                        id: "68538177-7a62-4752-bc4e-8f971d253b42"
+                    }
+                }) {
+                    id
+                    name
+                    parent {
+                        id
+                        name
+                    }
+                }
+            }
+        `).then(result => {
             assert.deepEqual(result, {
                 updateTags: {
                     id: tagId,
@@ -142,13 +143,13 @@ describe("Testing jsonapi-server graphql", () => {
             })
         }))
 
-        it("deletes the tag", () => client.mutate(`
-      {
-        deleteTags(id: "${tagId}") {
-          name
-        }
-      }
-    `).then(result => {
+        it("deletes the tag", () => client.request(gql`
+            mutation deleteTags {
+                deleteTags(id: "${tagId}") {
+                name
+                }
+            }
+        `).then(result => {
             assert.deepEqual(result, {
                 deleteTags: {
                     name: "test2"
@@ -156,13 +157,13 @@ describe("Testing jsonapi-server graphql", () => {
             })
         }))
 
-        it("really is gone", () => client.query(`
-      {
-        tags(id: "${tagId}") {
-          name
-        }
-      }
-    `).then(result => {
+        it("really is gone", () => client.request(gql`
+            {
+                tags(id: "${tagId}") {
+                name
+                }
+            }
+        `).then(result => {
             assert.deepEqual(result, {
                 tags: []
             })
