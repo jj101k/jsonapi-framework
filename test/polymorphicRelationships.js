@@ -3,11 +3,12 @@
 const assert = require("assert")
 const helpers = require("./helpers")
 const jsonApiTestServer = require("../example/server")
+const {gql, GraphQLClient} = require("graphql-request")
 
-const Lokka = require("lokka").Lokka
-const Transport = require("lokka-transport-http").Transport
-const client = new Lokka({
-    transport: new Transport("http://localhost:16006/rest/")
+const client = new GraphQLClient("http://localhost:16006/rest/", {
+    headers: {
+        Accept: "application/json"
+    }
 })
 
 describe("Testing jsonapi-server", () => {
@@ -99,7 +100,7 @@ describe("Testing jsonapi-server", () => {
             })
         })
 
-        it("works with GraphQL", () => client.query(`
+        it("works with GraphQL", () => client.request(gql`
             {
                 tuples {
                     preferred {
