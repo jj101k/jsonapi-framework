@@ -9,13 +9,18 @@ export type paramTree = {[key: string]: paramTree | string | string[]}
 /**
  *
  */
+export type Resource = {id: string} | {[key: string]: any}
+
+/**
+ *
+ */
 export interface postProcessingHandler {
     /**
      *
      * @param request
      * @param response
      */
-    action(request: express.Request | {params: paramTree}, response: express.Response): Promise<any>
+    action(request: express.Request | {params: paramTree}, response: express.Response & {data: Resource | Resource[], included: Resource[]}): Promise<any>
 }
 
 type relationDatum = {
