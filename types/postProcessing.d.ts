@@ -4,13 +4,18 @@ import { ResourceConfig } from "./ResourceConfig"
 /**
  *
  */
+export type paramTree = {[key: string]: paramTree | string | string[]}
+
+/**
+ *
+ */
 export interface postProcessingHandler {
     /**
      *
      * @param request
      * @param response
      */
-    action(request: express.Request, response: express.Response): Promise<any>
+    action(request: express.Request | {params: paramTree}, response: express.Response): Promise<any>
 }
 
 type relationDatum = {
