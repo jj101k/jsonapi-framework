@@ -14,13 +14,26 @@ export type Resource = {id: string} | {[key: string]: any}
 /**
  *
  */
+export type postProcessingRequest = express.Request & {processedFilter?: {operator: string, value: string}[]} | {params: paramTree}
+
+/**
+ *
+ */
+export type postProcessingResponse = express.Response & {
+    data: Resource | Resource[]
+    included?: Resource[]
+}
+
+/**
+ *
+ */
 export interface postProcessingHandler {
     /**
      *
      * @param request
      * @param response
      */
-    action(request: express.Request | {params: paramTree}, response: express.Response & {data: Resource | Resource[], included: Resource[]}): Promise<any>
+    action(request: postProcessingRequest, response: postProcessingResponse): Promise<any>
 }
 
 type relationDatum = {
