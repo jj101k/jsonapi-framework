@@ -1,6 +1,6 @@
 /// <reference types="joi" />
 /**
- * @module @jagql/framework/lib/ourJoi
+ * @module @jagql/framework/lib/OurJoi
  */
 import {AnySchema, Schema, FunctionSchema} from 'joi'
 import BaseJoi = require('joi')
@@ -29,4 +29,4 @@ interface OurJoi extends BaseJoi.Root {
   action(config: ActionConfig): FunctionSchema
 }
 
-export const Joi: OurJoi
+export default OurJoi

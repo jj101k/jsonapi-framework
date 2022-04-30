@@ -5,7 +5,7 @@
 /// <reference types="express" />
 
 import {Application, Request, Router} from 'express'
-import OurJoi = require('./ourJoi')
+import OurJoi = require('./OurJoi')
 import ChainHandlerType = require('./ChainHandler')
 import MemoryHandlerType = require('./MemoryHandler')
 import {ResourceConfig} from './ResourceConfig'
@@ -36,7 +36,7 @@ interface ApiConfig {
 /**
  * Our modified Joi instance
  */
-export const Joi: typeof OurJoi.Joi
+export const Joi: typeof OurJoi
 
 /**
  * Configure things like -
