@@ -1,8 +1,14 @@
 /**
  * @module @jagql/framework
  */
-import {Schema} from 'joi'
-import {Handler} from './Handler'
+import {Schema as JoiSchema} from 'joi'
+import {Handler, HandlerMisspelled} from './Handler'
+
+export type Schema = JoiSchema & {
+  _settings?: any
+  _type?: any
+  uidType?: (type: string) => Schema
+}
 
 export type BaseType = {
   id?: string
@@ -23,7 +29,7 @@ export interface ResourceConfig<Item> {
   namespace?: string,
   description?: string,
   resource: string,
-  handlers: Handler
+  handlers: Handler | HandlerMisspelled
   primaryKey: PrimaryKeyType,
   attributes: ResourceAttributes<Item>
   examples: (BaseType & Item)[]

@@ -31,6 +31,7 @@ interface ApiConfig {
   swagger?: any
   router?: Router
   bodyParserJsonOpts?: any
+  pathPrefix?: any
 }
 /**
  * Our modified Joi instance

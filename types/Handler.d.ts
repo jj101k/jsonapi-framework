@@ -76,3 +76,21 @@ declare class Handler<R=any> {
   handlesSort: boolean
   handlesFilter: boolean
 }
+
+/**
+ * [[include:handlers.md]]
+ * @param R type of resource (if unspecified, `any`)
+ */
+declare class HandlerMisspelled<R=any> {
+  constructor(o?: any)
+  initialize(resConfig: ResourceConfig<R>): any
+  create: CreateFunction<R>
+  search: SearchFunction<R>
+  find: FindFunction<R>
+  update: UpdateFunction<R>
+  delete: DeleteFunction
+  close: () => any
+  ready: boolean
+  handlesSort: boolean
+  handlesFilter: boolean
+}
