@@ -1,21 +1,23 @@
 const jsonApiTestServer = require("../example/server")
 const request = require("request")
 const assert = require("assert")
+const {OpenApiValidator} = require("openapi-data-validator")
 
 describe("Use a tool to validate the generated swagger document", () => {
     it("should not contain any errors", done => {
-        const validator = require("@apidevtools/swagger-parser")
-
         const uri = "http://localhost:16006/rest/swagger.json"
-        request(uri, (meh, res, swaggerObject) => {
+        request(uri, async (meh, res, swaggerObject) => {
             swaggerObject = JSON.parse(swaggerObject)
+            const openApiValidator = new OpenApiValidator({apiSpec: swaggerObject})
+            const validator = openApiValidator.createValidator()
 
-            validator.validate(swaggerObject, (err, result) => {
-                assert.ifError(err)
-
+            try {
+                await validator(swaggerObject)
                 console.log("Swagger document is valid")
-                done()
-            })
+            } catch(err) {
+                assert.ifError(err)
+            }
+            done()
         })
     })
 

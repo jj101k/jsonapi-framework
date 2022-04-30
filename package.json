@@ -36,7 +36,6 @@
     "uuid": "^8.0.0"
   },
   "devDependencies": {
-    "@apidevtools/swagger-parser": "^10.0.3",
     "@types/debug": "^4.1.7",
     "eslint": "^8.13.0",
     "eslint-config-standard": "^17.0.0-1",
@@ -49,6 +48,8 @@
     "mocha": "7.1.2",
     "mocha-performance": "0.1.1",
     "nyc": "^15.1.0",
+    "openapi-data-validator": "^2.0.44",
+    "openapi3-ts": "^2.0.2",
     "typedoc": "^0.22.15"
   },
   "scripts": {

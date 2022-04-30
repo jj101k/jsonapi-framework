@@ -7,6 +7,10 @@ const Swagger = require("../lib/Swagger")
 
 const swagger = new Swagger(jsonApi._resources, jsonApi._apiConfig)
 const url = require("url")
+
+/**
+ * @type {import("openapi3-ts").OpenAPIObject}
+ */
 let swaggerDoc
 
 swaggerValidator.assert = (params, statusCode, json) => {
@@ -22,7 +26,7 @@ swaggerValidator._validateRequest = (method, path, body) => {
     // Default Error model only implies a 404
     if (Object.keys(model.responses).length === 1) return null
 
-    const bodySchema = model.parameters.filter(parameter => parameter.in === "body").pop()
+    const bodySchema = Object.values(model.requestBody || {})[0]
 
     // If there is no schema and no body, all is good
     if (!bodySchema && !body) return null
@@ -42,9 +46,15 @@ swaggerValidator._validatePayload = (method, path, httpCode, payload) => {
     return swaggerValidator._validateModel(schema.schema, payload, `${method}@${path}`, "response", true)
 }
 
+/**
+ *
+ * @param {string} method
+ * @param {string} path
+ * @returns {import("openapi3-ts").OperationObject}
+ */
 swaggerValidator._getModel = (method, path) => {
     path = path.replace("/rest/", "/").replace(/\/$/, "")
-    let match = Object.keys(swaggerDoc.paths).filter(somePath => {
+    const match = Object.keys(swaggerDoc.paths).filter(somePath => {
         somePath = somePath.replace(/\{[a-zA-Z-_]*\}/gi, "(.*?)")
         somePath = `^${somePath}$`
         somePath = new RegExp(somePath)
@@ -58,13 +68,19 @@ swaggerValidator._getModel = (method, path) => {
         throw new Error(`Swagger Validation: No matching path for ${path}`)
     }
 
-    match = swaggerDoc.paths[match]
-    match = match[method]
+    /**
+     * @type {import("openapi3-ts").PathItemObject}
+     */
+    const matchData = swaggerDoc.paths[match]
+    /**
+     * @type {import("openapi3-ts").OperationObject}
+     */
+    const matchData2 = matchData[method]
 
-    if (!match) {
+    if (!matchData2) {
         throw new Error(`Swagger Validation: No matching path for ${method} ${path}`)
     }
-    return match
+    return matchData2
 }
 
 swaggerValidator._validateModel = (model, payload, urlPath, validationPath, required) => {
