@@ -32,6 +32,8 @@ interface ApiConfig {
   router?: Router
   bodyParserJsonOpts?: any
   pathPrefix?: any
+
+  host?: string // Only for backwards compat
 }
 /**
  * Our modified Joi instance
