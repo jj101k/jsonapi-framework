@@ -1,14 +1,16 @@
 {
   "compilerOptions": {
+    "checkJs": true,
     "module": "commonjs",
     "moduleResolution": "node",
+    "strict": true,
+    "strictNullChecks": true,
     "target": "es2015",
     "noEmit": true
   },
   "include": ["types"],
   "exclude": [
-    "node_modules",
-    "lib"
+    "node_modules"
   ],
   "typedocOptions": {
     "includes": "resources/guides",
