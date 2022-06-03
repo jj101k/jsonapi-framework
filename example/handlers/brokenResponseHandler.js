@@ -1,6 +1,6 @@
-'use strict'
+"use strict"
 
-const jsonApi = require('../..')
+const jsonApi = require("../..")
 
 const brokenResponseHandler = new jsonApi.ChainHandler()
 

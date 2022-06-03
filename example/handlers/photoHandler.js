@@ -1,6 +1,6 @@
-'use strict'
+"use strict"
 
-const jsonApi = require('../..')
+const jsonApi = require("../..")
 
 module.exports = new jsonApi.MemoryHandler()
 module.exports.delete = null
