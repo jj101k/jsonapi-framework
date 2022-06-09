@@ -375,7 +375,7 @@ describe("Testing jsonapi-server", () => {
                     json = helpers.validateJson(json)
 
                     assert.strictEqual(res.statusCode, 200, "Expecting 200 OK")
-                    assert.strictEqual(json.data.length, 3, "Should only give the 3x requested resources")
+                    assert.strictEqual(json.data.length, 3, "Should give the 3x requested resources")
 
                     done()
                 })
@@ -391,7 +391,7 @@ describe("Testing jsonapi-server", () => {
                     json = helpers.validateJson(json)
 
                     assert.strictEqual(res.statusCode, 200, "Expecting 200 OK")
-                    assert.strictEqual(json.data.length, 2, "Should only give the 2x requested resources")
+                    assert.strictEqual(json.data.length, 2, "Should give the 2x requested resources")
 
                     done()
                 })
