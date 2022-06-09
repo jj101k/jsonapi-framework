@@ -28,7 +28,9 @@ describe("Testing jsonapi-server (pre-resource)", () => {
     })
 
     before(() => {
-        jsonApiTestServer.start()
+        jsonApiTestServer.start(() => {
+            console.log('Server running on http://localhost:16006')
+        })
     })
     after(() => {
         jsonApiTestServer.close()
