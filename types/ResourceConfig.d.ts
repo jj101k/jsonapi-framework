@@ -1,14 +1,8 @@
 /**
  * @module @jagql/framework
  */
-import {Schema as JoiSchema} from 'joi'
+import {Schema} from 'joi'
 import {Handler, HandlerMisspelled} from './Handler'
-
-export type Schema = JoiSchema & {
-  _settings?: any
-  _type?: any
-  uidType?: (type: string) => Schema
-}
 
 export type BaseType = {
   id?: string
