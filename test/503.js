@@ -16,7 +16,7 @@ describe("Testing jsonapi-server", () => {
                 if(err) console.error(err)
                 assert(!err)
                 if(res.statusCode !== 200) {
-                    console.warn(res)
+                    console.warn("Not 200", res.statusCode, res.body)
                 }
                 assert.strictEqual(res.statusCode, 200, "Expecting 200 OK")
                 done()
