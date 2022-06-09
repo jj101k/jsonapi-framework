@@ -44,6 +44,7 @@ describe("Testing jsonapi-server", () => {
                 json = helpers.validateJson(json)
 
                 assert.strictEqual(res.statusCode, 200, "Expecting 200 OK")
+                assert.notStrictEqual(json.data, null, "Should be a resource")
                 assert.strictEqual(json.data.type, "people", "Should be a people resource")
 
                 assert.ok(json instanceof Object, "Response should be an object")

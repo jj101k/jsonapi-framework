@@ -31,6 +31,11 @@ swaggerValidator._validateRequest = (method, path, body) => {
     // If there is no schema and no body, all is good
     if (!bodySchema && !body) return null
 
+    if(body && !bodySchema) {
+        throw new Error(`No schema discovered for ${method} ${path}`)
+    }
+
+    // This is a JSON schema
     return swaggerValidator._validateModel(bodySchema.schema, body, `${method}@${path}`, "request", true)
 }
 
@@ -43,7 +48,12 @@ swaggerValidator._validatePayload = (method, path, httpCode, payload) => {
     }
     if (!schema) throw new Error(`Unknown payload for ${method}, ${path}, ${httpCode}`)
 
-    return swaggerValidator._validateModel(schema.schema, payload, `${method}@${path}`, "response", true)
+    try {
+        return swaggerValidator._validateModel(schema.schema, payload, `${method}@${path}`, "response", true)
+    } catch(e) {
+        console.warn(payload)
+        throw e
+    }
 }
 
 /**

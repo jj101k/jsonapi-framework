@@ -15,6 +15,7 @@ testHelpers.validateError = json => {
         throw new Error("Failed to parse response")
     }
     let keys = Object.keys(o)
+    assert.strictEqual(o.data, undefined, "Errors should not include data")
     assert.deepEqual(keys, ["jsonapi", "meta", "links", "errors"], "Errors should have specific properties")
     assert.strictEqual(typeof o.links.self, "string", "Errors should have a \"self\" link")
     assert.ok(o.errors instanceof Array, "errors should be an array")
