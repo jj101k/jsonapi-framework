@@ -25,13 +25,13 @@ export type OptionalResourceAttributes<Item> = {
 
 type PrimaryKeyType = 'uuid' | 'autoincrement' | 'string'
 
-export interface ResourceConfig<Item> {
+export interface ResourceConfig<T> {
   namespace?: string,
   description?: string,
   resource: string,
   handlers: Handler | HandlerMisspelled
   primaryKey: PrimaryKeyType,
-  attributes: ResourceAttributes<Item>
-  examples: (BaseType & Item)[]
-  searchParams?: OptionalResourceAttributes<Item>
+  attributes: ResourceAttributes<T>
+  examples: (BaseType & Partial<T>)[]
+  searchParams?: OptionalResourceAttributes<T>
 }
