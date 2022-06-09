@@ -32,7 +32,7 @@ describe("Testing jsonapi-server", () => {
                 assert.strictEqual(res.statusCode, 500, "Expecting 500")
                 assert.strictEqual(errors.length, 1)
                 assert.strictEqual(errors[0].code, "EINVALIDITEM")
-                assert.strictEqual(errors[0].detail.error, "child \"boolean\" fails because [\"boolean\" must be a boolean]")
+                assert.match(errors[0].detail.error, /"boolean" must be a boolean/)
                 done()
             })
         })
