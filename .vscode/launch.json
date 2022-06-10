@@ -16,6 +16,14 @@
                 "${workspaceFolder}/node_modules/**"
             ],
             "program": "${workspaceFolder}/node_modules/.bin/mocha"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "name": "Run tests",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": ["run", "test"]
         }
     ]
 }
