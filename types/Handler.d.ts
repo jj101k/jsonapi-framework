@@ -94,3 +94,5 @@ declare class HandlerMisspelled<R=any> {
   handlesSort: boolean
   handlesFilter: boolean
 }
+
+export type handlerName = "create" | "delete" | "find" | "search" | "update"
