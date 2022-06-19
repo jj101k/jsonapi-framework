@@ -3,12 +3,13 @@
  */
 
 import {Request, Response} from 'express'
+import { paramTree } from './postProcessing'
 import {ResourceConfig} from './ResourceConfig'
 
 export type HttpVerbs = 'GET' | 'POST' | 'DELETE' | 'PUT' | 'PATCH'
 
 export interface JsonApiRequest {
-  params: any
+  params: paramTree
   headers: any
   safeHeaders: any
   cookies: any
