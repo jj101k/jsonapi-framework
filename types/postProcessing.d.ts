@@ -1,4 +1,5 @@
 import * as express from "express"
+import { JsonApiRequest } from "./Handler"
 import { ResourceConfig } from "./ResourceConfig"
 
 /**
@@ -14,7 +15,7 @@ export type Resource = {id: string} | {[key: string]: any}
 /**
  *
  */
-export type postProcessingRequest = express.Request & {processedFilter?: {operator: string, value: string}[]} | {params: paramTree}
+export type postProcessingRequest = JsonApiRequest & {processedFilter?: {operator: string, value: string}[]} | {params: paramTree}
 
 /**
  *
