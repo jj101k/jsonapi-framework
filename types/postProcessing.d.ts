@@ -1,5 +1,5 @@
-import * as express from "express"
 import { JsonApiRequest } from "./Handler"
+import { Response } from "express"
 import { ResourceConfig } from "./ResourceConfig"
 
 /**
@@ -10,17 +10,17 @@ export type paramTree = {[key: string]: paramTree | string | string[]}
 /**
  *
  */
-export type Resource = {id: string} | {[key: string]: any}
+export type Resource = {id: string, type: string} | {[key: string]: any}
 
 /**
  *
  */
-export type postProcessingRequest = JsonApiRequest & {processedFilter?: {operator: string, value: string}[]} | {params: paramTree}
+export type postProcessingRequest<T> = JsonApiRequest<T> & {processedFilter?: {operator: string, value: string}[]} | {params: paramTree}
 
 /**
  *
  */
-export type postProcessingResponse = express.Response & {
+export type postProcessingResponse = Response & {
     data: Resource | Resource[]
     included?: Resource[]
 }
@@ -34,7 +34,7 @@ export interface postProcessingHandler {
      * @param request
      * @param response
      */
-    action(request: postProcessingRequest, response: postProcessingResponse): Promise<any>
+    action<T>(request: postProcessingRequest<T>, response: postProcessingResponse): Promise<any>
 }
 
 type relationDatum = {

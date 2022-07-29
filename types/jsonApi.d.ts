@@ -2,8 +2,6 @@
  * @module @jagql/framework
  */
 
-/// <reference types="express" />
-
 import {Application, Request, Router} from 'express'
 import OurJoi = require('./OurJoi')
 import ChainHandlerType = require('./ChainHandler')
@@ -32,6 +30,7 @@ interface ApiConfig {
   router?: Router
   bodyParserJsonOpts?: any
   pathPrefix?: any
+  tls?: any
 
   host?: string // Only for backwards compat
 }

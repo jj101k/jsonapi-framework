@@ -9,26 +9,26 @@ import {
 type BeforeSearchFunction = SearchFunction
 type BeforeFindFunction = FindFunction
 type BeforeCreateFunction = CreateFunction
-type BeforeDeleteFunction = DeleteFunction
+type BeforeDeleteFunction<R> = DeleteFunction<R>
 type BeforeUpdateFunction = UpdateFunction
 
 interface AfterSearchFunction<R=any> {
-  (request: JsonApiRequest, results: R[], count: number, callback: HandlerCallback<R[], number>): void
+  (request: JsonApiRequest<R>, results: R[], count: number, callback: HandlerCallback<R[], number>): void
 }
 interface AfterFindFunction<R=any> {
-  (request: JsonApiRequest, result: R, callback: HandlerCallback<R>): void
+  (request: JsonApiRequest<R>, result: R, callback: HandlerCallback<R>): void
 }
 
 interface AfterCreateFunction<R=any> {
-  (request: JsonApiRequest, createdResource: R, callback: HandlerCallback<R>): void
+  (request: JsonApiRequest<R>, createdResource: R, callback: HandlerCallback<R>): void
 }
 
-interface AfterDeleteFunction {
-  (request: JsonApiRequest, callback: HandlerCallback<void>): void
+interface AfterDeleteFunction<R> {
+  (request: JsonApiRequest<R>, callback: HandlerCallback<void>): void
 }
 
 interface AfterUpdateFunction<R=any> {
-  (request: JsonApiRequest, updatedResource: R, callback: HandlerCallback<R>): void
+  (request: JsonApiRequest<R>, updatedResource: R, callback: HandlerCallback<R>): void
 }
 
 /**
@@ -49,8 +49,8 @@ declare class ChainHandler<R=any> extends Handler<R>{
   afterCreate: AfterCreateFunction<R>
   beforeUpdate: BeforeUpdateFunction
   afterUpdate: AfterUpdateFunction<R>
-  beforeDelete: BeforeDeleteFunction
-  afterDelete: AfterDeleteFunction
+  beforeDelete: BeforeDeleteFunction<R>
+  afterDelete: AfterDeleteFunction<R>
 }
 
 export = ChainHandler

@@ -8,24 +8,40 @@ import {ResourceConfig} from './ResourceConfig'
 
 export type HttpVerbs = 'GET' | 'POST' | 'DELETE' | 'PUT' | 'PATCH'
 
-export interface JsonApiRequest {
-  params: paramTree
+export interface JsonApiRequestBasic<A=any> {
+  params: {
+    page?: {
+      offset?: string | number
+      limit?: string | number
+      size?: string | number
+    }
+    relation?: string
+  } & paramTree & A
   headers: any
   safeHeaders: any
   cookies: any
   originalUrl: string
   express: {
     req: Request,
-    res: Response
+    res: Response | undefined,
   }
+  /**
+   *
+   */
+  postProcess?: string
   route: {
     verb: HttpVerbs
-    host: string
-    base: string
+    host: string | undefined
+    base: string | undefined
     path: string
     query: string
     combined: string
   }
+}
+
+export interface JsonApiRequest<T, A=any> extends JsonApiRequestBasic<A> {
+  resourceConfig: ResourceConfig<T>
+  processedFilter?: {[key: string]: {operator: string | null, value: string}[]}
 }
 
 export interface JsonApiError {
@@ -42,22 +58,22 @@ export interface HandlerCallback<R, C = undefined> {
 
 
 export interface SearchFunction<R=any> {
-  (request: JsonApiRequest, callback: HandlerCallback<R[], number>): void
+  (request: JsonApiRequest<R>, callback: HandlerCallback<R[], number>): void
 }
 export interface FindFunction<R=any> {
-  (request: JsonApiRequest, callback: HandlerCallback<R>): void
+  (request: JsonApiRequest<R>, callback: HandlerCallback<R>): void
 }
 
 export interface CreateFunction<R=any> {
-  (request: JsonApiRequest, newResource: R, callback: HandlerCallback<R>): void
+  (request: JsonApiRequest<R>, newResource: R, callback: HandlerCallback<R>): void
 }
 
-export interface DeleteFunction {
-  (request: JsonApiRequest, callback: HandlerCallback<void>): void
+export interface DeleteFunction<R> {
+  (request: JsonApiRequest<R>, callback: HandlerCallback<void>): void
 }
 
 export interface UpdateFunction<R=any> {
-  (request: JsonApiRequest, newPartialResource: Partial<R>, callback: HandlerCallback<R>): void
+  (request: JsonApiRequest<R>, newPartialResource: Partial<R>, callback: HandlerCallback<R>): void
 }
 
 /**
@@ -71,7 +87,7 @@ declare class Handler<R=any> {
   search: SearchFunction<R>
   find: FindFunction<R>
   update: UpdateFunction<R>
-  delete: DeleteFunction
+  delete: DeleteFunction<R>
   close: () => any
   ready: boolean
   handlesSort: boolean
@@ -89,7 +105,7 @@ declare class HandlerMisspelled<R=any> {
   search: SearchFunction<R>
   find: FindFunction<R>
   update: UpdateFunction<R>
-  delete: DeleteFunction
+  delete: DeleteFunction<R>
   close: () => any
   ready: boolean
   handlesSort: boolean
