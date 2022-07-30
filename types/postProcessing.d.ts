@@ -12,6 +12,24 @@ export type paramTree = {[key: string]: paramTree | string | string[]}
  */
 export type Resource = {id: string, type: string} | {[key: string]: any}
 
+interface ObjectIdentity {
+    id: string
+    type: string
+}
+
+interface Relationship {
+    data: ObjectIdentity[] | ObjectIdentity | null
+    links: {
+        self: string,
+        related: string,
+    }
+}
+
+export interface FullResource extends ObjectIdentity {
+    attributes: Record<string, any>
+    relationships: Record<string, Relationship>
+}
+
 /**
  *
  */
@@ -21,8 +39,8 @@ export type postProcessingRequest<T> = JsonApiRequest<T> & {processedFilter?: {o
  *
  */
 export type postProcessingResponse = Response & {
-    data: Resource | Resource[]
-    included?: Resource[]
+    data: FullResource | FullResource[]
+    included?: FullResource[]
 }
 
 /**
