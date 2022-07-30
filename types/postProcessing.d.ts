@@ -5,7 +5,7 @@ import { ResourceConfig } from "./ResourceConfig"
 /**
  *
  */
-export type paramTree = {[key: string]: paramTree | string | string[]}
+export type paramTree = {[key: string]: paramTree | string | string[] | undefined}
 
 /**
  *

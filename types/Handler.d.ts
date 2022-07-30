@@ -39,8 +39,11 @@ export interface JsonApiRequestBasic<A=any> {
   }
 }
 
-export interface JsonApiRequest<T, A=any> extends JsonApiRequestBasic<A> {
+export interface JsonApiRequestInitial<T, A=any> extends JsonApiRequestBasic<A> {
   resourceConfig: ResourceConfig<T>
+}
+
+export interface JsonApiRequest<T, A=any> extends JsonApiRequestInitial<T, A> {
   processedFilter?: {[key: string]: {operator: string | null, value: string}[]}
 }
 
