@@ -33,7 +33,7 @@ export interface FullResource extends ObjectIdentity {
 /**
  *
  */
-export type postProcessingRequest<T> = JsonApiRequest<T> & {processedFilter?: {operator: string, value: string}[]} | {params: paramTree}
+export type postProcessingRequest<T> = JsonApiRequest<T> & {processedFilter?: {operator: string, value: string}[], params: paramTree}
 
 /**
  *

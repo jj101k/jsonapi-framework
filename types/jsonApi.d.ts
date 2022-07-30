@@ -2,7 +2,7 @@
  * @module @jagql/framework
  */
 
-import {Application, Request, Router} from 'express'
+import {Application, Request, Express} from 'express'
 import OurJoi = require('./OurJoi')
 import ChainHandlerType = require('./ChainHandler')
 import MemoryHandlerType = require('./MemoryHandler')
@@ -27,7 +27,7 @@ interface ApiConfig {
   base: string,
   meta: any
   swagger?: any
-  router?: Router
+  router?: Express,
   bodyParserJsonOpts?: any
   pathPrefix?: any
   tls?: any
